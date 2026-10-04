@@ -1,4 +1,4 @@
-# AAK AMEA target screening pipeline
+# Acquisition-target screening pipeline
 
 A five-layer multi-agent screening setup for Claude Code. Layers 1 to 3 produce a normalised, enriched, source-traced candidate pool. Layer 4 scores it deterministically and layer 5 stress-tests the ranking before it reaches AAK.
 
