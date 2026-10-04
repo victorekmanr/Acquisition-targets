@@ -1,17 +1,17 @@
 # Acquisition-target screening pipeline
 
-A five-layer multi-agent screening setup for Claude Code. Layers 1 to 3 produce a normalised, enriched, source-traced candidate pool. Layer 4 scores it deterministically and layer 5 stress-tests the ranking before it reaches AAK.
+A five-layer multi-agent screening setup for Claude Code. Layers 1 to 3 produce a normalised, enriched, source-traced candidate pool. Layer 4 scores it deterministically and layer 5 stress-tests the ranking before it reaches the end goal.
 
 ## Setup
 1. Unzip into a folder and open it in Claude Code.
 2. Read `CLAUDE.md`. It tells the main session how to run each layer.
-3. Check `criteria/screening-criteria.md` section 13 and update anything AAK has since confirmed.
+3. Check `criteria/screening-criteria.md` section 13 and update anything that has since been confirmed.
 
 ## Layout
 ```
 CLAUDE.md                        orchestration instructions, read automatically by Claude Code
 criteria/screening-criteria.md   single source of truth for scope and criteria
-criteria/scoring-weights.json    every layer 4 tunable, AAK's to edit
+criteria/scoring-weights.json    every layer 4 tunable
 docs/discovery-rules.md          shared rules for layer 1 agents
 docs/enrichment-rules.md         shared rules for layer 3 agents
 docs/scoring-rules.md            layer 4 methodology: dimension -> sub-metric -> rule -> field
@@ -83,6 +83,5 @@ $ python scripts/score.py --apply-review        # after review, see the score im
 - Three mandatory criteria (potential for global leadership, favourable growth, ability to differentiate) and the market-size floor cannot be established from one company's enriched record. They are recorded as human verdicts in `data/gate-judgements.csv`, not approximated in code; an unfilled verdict resolves to `review`, never to a quiet `pass`.
 - Layer 5 cannot change a score. Its findings reach one only through `scripts/score.py --apply-review`, run by a person, and a human override in `data/overrides.csv` never touches `total_score` or `rank`. What AAK sees is the evidence-based score, the red team's verdict, and the human decision, side by side.
 
-## Outstanding
-The pipeline is complete end to end. What remains is AAK's own input: confirming the weights and lookups in `criteria/scoring-weights.json`, filling in `data/gate-judgements.csv`, and resolving the open questions in `criteria/screening-criteria.md` section 13 (the size ceiling's currency and basis, the EBIT-per-kg baseline, the definition of a stable region, whether the frontier-tech track runs on separate criteria, and long-list size among them). Every one of those is called out in `data/longlist.md` each time it is generated.
+
 # Acquisition-targets
